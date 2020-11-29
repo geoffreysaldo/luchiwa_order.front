@@ -1,0 +1,11 @@
+.mat-card{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 90%; 
+    .button{
+        margin: 3px 0px 0px 3px;
+        min-height: 70px;
+        width: 100px;
+    }
+}

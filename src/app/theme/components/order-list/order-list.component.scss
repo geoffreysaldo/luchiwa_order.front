@@ -1,0 +1,38 @@
+.mat-card{
+    height: 90%;
+    width: 33%;
+    min-width: 200px;
+    overflow: hidden;
+    .title{
+        text-align: center;
+        font-weight: bold;;
+    }
+    .order_quantity{
+        font-size: 14px;
+        font-weight: bold;
+        font-style: italic;
+    }
+    .order_list{
+        height: calc(100% - 80px);
+        overflow-y: auto;
+    }
+    .order_list::-webkit-scrollbar {
+        display: none;
+      }
+
+.div_total{
+    width: 100%;
+    margin-top: 10px;;
+    .mat_divider{
+        width: 90%;
+        margin: 0% 5% 0% 5%;
+    }
+    .span_total{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding-top: 10px;
+        font-weight: bold;
+    }
+}
+}

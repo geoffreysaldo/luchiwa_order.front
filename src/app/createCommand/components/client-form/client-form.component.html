@@ -1,0 +1,74 @@
+<mat-card>
+    <form [formGroup]="commandForm">
+        <h3 class="titre_client">Informations commande</h3>
+        <mat-form-field *ngIf="this.mode === 'LIVRAISON' || this.mode === 'EMPORTER'">
+            <mat-label>
+                Nom:
+            </mat-label>
+            <input matInput type="text" formControlName="lastName" [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions" [value]="option.lastName" class="option"(click)="setClient(option)">
+                        <span class="name">{{option.firstName}} {{option.lastName}}</span>
+                        <span class="address" *ngIf="option.address">{{option.address}}<span *ngIf="option.zipCode">, {{option.zipCode}}</span></span>
+                        <span class="address" > {{option.city}}</span>
+                        <span class="phone_number">{{option.phoneNumber}}</span>
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field *ngIf="this.mode === 'LIVRAISON' || this.mode === 'EMPORTER'">
+            <mat-label>
+                Prénom:
+            </mat-label>
+            <input matInput type="text" formControlName="firstName">
+
+        </mat-form-field>
+        <mat-form-field *ngIf="this.mode === 'LIVRAISON'">
+
+            <mat-label>
+                Adresse:
+            </mat-label>
+            <input matInput type="text" formControlName="address">
+
+        </mat-form-field>
+        <mat-form-field *ngIf="this.mode === 'LIVRAISON'">
+
+            <mat-label>
+                Ville:
+            </mat-label>
+            <input matInput type="text" formControlName="city">
+
+        </mat-form-field>
+        <mat-form-field *ngIf="this.mode === 'LIVRAISON'">
+            <mat-label>
+                Code postal:
+            </mat-label>
+            <input matInput type="text" formControlName="zipCode">
+
+        </mat-form-field>
+        <mat-form-field *ngIf="this.mode === 'LIVRAISON' || this.mode === 'EMPORTER'">
+            <mat-label>
+                N° téléphone:
+            </mat-label>
+            <input matInput type="tel" formControlName="phoneNumber">
+        </mat-form-field>
+        <mat-form-field *ngIf="this.mode === 'SUR_PLACE'">
+            <mat-label>
+                N° Table :
+            </mat-label>
+            <input matInput type="number" formControlName="table">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>
+                Couverts:
+            </mat-label>
+            <input matInput type="number" formControlName="cutlery">
+        </mat-form-field>
+        <mat-form-field *ngIf="this.mode === 'LIVRAISON' || this.mode === 'EMPORTER'">
+            <mat-label>
+                Heure:
+            </mat-label>
+            <input matInput type="time" formControlName="hour">
+        </mat-form-field>
+    </form>
+    <button mat-raised-button color="primary" (click)="saveOrder()">Enregistrer la commande</button>
+</mat-card>

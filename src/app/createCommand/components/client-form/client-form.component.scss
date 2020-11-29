@@ -1,0 +1,38 @@
+.mat-card{
+    height: 90%;
+    width: 250px;
+}
+.titre_client{
+    font-weight: bold;;
+}
+
+.mat-raised-button{
+    margin-top: 20px;
+    width: 100%;
+}
+
+.mat-option{
+    height: 80px;
+}
+
+::ng-deep .mat-option-text {
+    display:flex !important;
+    flex-direction:column !important;
+    line-height: 18px;
+    width: 100%;
+    justify-content: center;
+    .name{
+        font-size: 12px;
+        font-weight: bold;
+    }
+    .phone_number{
+        font-size: 12px;
+        font-weight: bold;
+        font-style: italic;
+    }
+    .address{
+        font-size: 12px;
+        font-weight: bold;
+        font-style: italic;
+    }
+}

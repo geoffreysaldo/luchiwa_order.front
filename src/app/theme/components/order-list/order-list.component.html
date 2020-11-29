@@ -1,0 +1,13 @@
+<mat-card>
+    <h3 class="title">{{mode}}</h3>
+    <div class="order_list" *ngIf="orders">
+        <span class="order_quantity">{{orders.length}} commande(s)</span>
+        <div *ngFor='let order of orders'>
+            <app-order-card [order]='order' [mode]='mode' (deleteEmitter)="deleteOrder($event)"></app-order-card>
+        </div>
+    </div>
+    <div class="div_total">
+        <mat-divider class="mat_divider"></mat-divider>
+        <div class="span_total">Total TTC : {{totalTTCMode | number:'1.2-2'}} €</div>
+    </div>
+</mat-card>

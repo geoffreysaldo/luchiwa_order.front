@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-list>
+            <mat-list-item *ngFor="let product of selectedProducts">
+                <div class="div_product">
+                    <div class="span_product">
+                        <div class="info_bag">{{product.quantity}} x {{product.product.name}}</div>
+                        <div class="add_sub">
+                            <mat-icon aria-hidden="false" (click)="addProduct(product)">add</mat-icon>
+                            <mat-icon aria-hidden="false" (click)="removeProduct(product)">remove</mat-icon>
+                        </div>
+                    </div>
+                    <span class="span_sub_total">{{product.product.price*product.quantity | number:'1.2-2' }}€</span>
+                </div>
+                <mat-divider></mat-divider>
+            </mat-list-item>
+    </mat-list>
+    <div class="div_total">
+        <mat-divider class="last_divider"></mat-divider>
+        <div class="span_total">Total TTC : {{totalTTC | number:'1.2-2'}}€</div>
+    </div>
+</mat-card>

@@ -1,0 +1,10 @@
+<mat-card>
+    <mat-grid-list cols="2">
+        <button mat-raised-button *ngFor="let product of products" class="button" color="primary" (click)="addProduct(product)">
+            <div class="div_button">
+                <span class="name">{{product.name}}</span>
+                <span class="price">{{product.price | number:'1.2-2' }}€</span>
+            </div>
+        </button>
+    </mat-grid-list>
+</mat-card>

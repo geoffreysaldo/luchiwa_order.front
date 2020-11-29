@@ -1,0 +1,26 @@
+.mat-card{
+    height: 90%;
+    width: 482px;
+    .mat-grid-list{
+        height: 100%;
+        overflow-y: auto;
+        .button{
+            margin: 2px;
+            height: 70px;
+            width: 150px;
+            text-align: center;
+            .div_button{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                .name{
+                }
+                .price{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-end; 
+                }
+            }
+        }
+    }
+}

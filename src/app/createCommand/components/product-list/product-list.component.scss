@@ -1,0 +1,49 @@
+
+.mat-card{
+    width:220px;
+    height: 90%;
+    overflow: hidden;
+}
+.mat-list{
+    height: calc(100% - 35px);
+    overflow-y: auto;
+    .div_product{
+        display: flex;
+        flex-direction: column;
+        .span_product{
+            display: flex;
+            flex-direction: row;
+            font-size: 12px;
+            font-weight: bold;
+            .info_bag{
+                width:150px;
+            }
+            .add_sub{
+                display: flex;
+                flex-direction: row;
+                .mat-icon{
+                    cursor: pointer
+                }
+            }
+        }
+        .span_sub_total{
+            font-size: 12px;
+            font-style: italic;
+        }
+    }
+}
+
+.div_total{
+    width: 100%;
+    .last_divider{
+        width: 90%;
+        margin: 0% 5% 0% 5%;
+    }
+    .span_total{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding-top: 10px;
+        font-weight: bold;
+    }
+}

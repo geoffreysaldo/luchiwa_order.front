@@ -1,0 +1,49 @@
+<mat-card class="div_card" (click)="expandProduct()" *ngIf="mode === 'LIVRAISON' || mode === 'EMPORTER' && !order.table">
+    <div class="first_row" *ngIf="mode === 'LIVRAISON' || mode === 'EMPORTER'">
+        <span class="name">{{order.client.firstName}} {{order.client.lastName}}</span>
+        <span class="hour">{{order.hour}}</span>
+    </div>
+    <span class="phone_number" *ngIf="mode === 'LIVRAISON' || mode === 'EMPORTER'">{{order.client.phoneNumber}}</span>
+    <div class="address" *ngIf="mode === 'LIVRAISON'">
+        <span>{{order.client.address}}</span>
+        <span *ngIf="order.client.zipCode">, {{order.client.zipCode}}</span>
+        <span *ngIf="order.client.city"> {{order.client.city}}</span>
+    </div>
+    <div class="product_list" *ngIf="expanded">
+        <mat-list-item *ngFor="let product of order.products">
+            <div class="div_product">
+                <div class="span_product">
+                    <div class="info_bag">{{product.quantity}} x {{product.product.name}}</div>
+                </div>
+                <span class="span_sub_total">{{product.product.price*product.quantity | number:'1.2-2' }}€</span>
+            </div>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+        <button mat-raised-button color="warn" (click)="deleteOrder()">Supprimer</button>
+    </div>
+    <div class="total">
+        <span>Couverts: {{order.cutlery}}</span>
+        <span>{{order.total| number:'1.2-2'}} €</span>
+    </div>
+</mat-card>
+<mat-card class="div_card" (click)="expandProduct()" *ngIf="mode === 'SUR_PLACE' && order.table">
+    <span *ngIf="mode === 'SUR_PLACE'" class="table">
+        Table: {{order.table}}
+    </span>
+    <div class="product_list" *ngIf="expanded">
+        <mat-list-item *ngFor="let product of order.products">
+            <div class="div_product">
+                <div class="span_product">
+                    <div class="info_bag">{{product.quantity}} x {{product.product.name}}</div>
+                </div>
+                <span class="span_sub_total">{{product.product.price*product.quantity | number:'1.2-2' }}€</span>
+            </div>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+        <button mat-raised-button color="warn" (click)="deleteOrder()">Supprimer</button>
+    </div>
+    <div class="total">
+        <span>Couverts: {{order.cutlery}}</span>
+        <span>{{order.total| number:'1.2-2'}} €</span>
+    </div>
+</mat-card>
