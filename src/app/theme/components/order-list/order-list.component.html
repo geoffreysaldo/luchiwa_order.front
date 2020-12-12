@@ -3,7 +3,7 @@
     <div class="order_list" *ngIf="orders">
         <span class="order_quantity">{{orders.length}} commande(s)</span>
         <div *ngFor='let order of orders'>
-            <app-order-card [order]='order' [mode]='mode' (deleteEmitter)="deleteOrder($event)"></app-order-card>
+            <app-order-card [order]='order' [mode]='mode' (deleteEmitter)="deleteOrder($event)" (printTicketEmitter)="printTicket(order)"></app-order-card>
         </div>
     </div>
     <div class="div_total">

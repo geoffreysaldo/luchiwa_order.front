@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { jsPDF } from "jspdf";
-import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-order-card',
   templateUrl: './order-card.component.html',
@@ -10,11 +9,11 @@ export class OrderCardComponent implements OnInit {
   @Input() order;
   @Input() mode;
   @Output() deleteEmitter = new EventEmitter();
+  @Output() printTicketEmitter = new EventEmitter();
   expanded = false
-  constructor(private datepipe: DatePipe) { }
+  constructor() { }
 
   ngOnInit(): void {
-    console.log(this.order)
   }
 
   expandProduct(){
@@ -26,7 +25,9 @@ export class OrderCardComponent implements OnInit {
   }
 
   printOrder() {
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    console.log(this.order)
+    this.printTicketEmitter.emit(this.order);
+    /*const reducer = (accumulator, currentValue) => accumulator + currentValue;
     const now = new Date();
     const doc = new jsPDF('p', 'mm', [72, 210]);
     doc.setFontSize(6);
@@ -95,6 +96,6 @@ export class OrderCardComponent implements OnInit {
       doc.text(totalHT[index].toFixed(2),32,y+(index)*2);
       doc.text(totalTax[index].toFixed(2),60,y+(index)*2);
     })
-    doc.save("hello.pdf");
+    doc.save("hello.pdf");*/
   }
 }

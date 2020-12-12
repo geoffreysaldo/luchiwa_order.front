@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { OrderService } from './infra/order.service';
+import { OrderPrintService } from './infra/order-print.service';
 import {ThemeModule} from '../theme/theme.module';
 
 @NgModule({
@@ -36,6 +37,7 @@ import {ThemeModule} from '../theme/theme.module';
     exports: [],
     providers: [
         OrderService,
+        OrderPrintService,
     ]
 })
 

@@ -12,6 +12,8 @@ export class OrderListComponent implements OnChanges {
   @Input() orders: Order[];
   totalTTCMode: number = 0;
   @Output() deleteEmitter = new EventEmitter();
+  @Output() printTicketEmitter = new EventEmitter();
+
   constructor(
   ) { }
 
@@ -26,5 +28,10 @@ export class OrderListComponent implements OnChanges {
 
   deleteOrder($event){
     this.deleteEmitter.emit($event)
+  }
+
+  printTicket(order) {
+    console.log(order)
+    this.printTicketEmitter.emit(order);
   }
 }

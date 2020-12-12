@@ -3,5 +3,5 @@
     <app-product-grid [products]="products" (productEmitter)="addProduct($event)"></app-product-grid>
     <app-product-list [selectedProducts]="selectedProducts" [totalTTC]="totalTTC" (productEmitter)="updateQuantityProduct($event)"></app-product-list>
     <app-client-form [mode]='mode' (clientEmitter)="setOrderInformation($event)"></app-client-form>
-    <app-order-list [mode]="mode" [orders]="orders" (deleteEmitter)="deleteOrder($event)"></app-order-list>
+    <app-order-list [mode]="mode" [orders]="orders" (deleteEmitter)="deleteOrder($event)" (printTicketEmitter)="printTicket($event)"></app-order-list>
 </div>

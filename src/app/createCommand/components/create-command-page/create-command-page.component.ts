@@ -6,6 +6,8 @@ import { Mode } from '../../models/mode.model'
 import { OrderInformation } from '../../models/orderInformation.interface';
 import { Order } from '../../models/order.interface';
 import { OrderService } from '../../infra/order.service';
+import { OrderPrintService } from '../../infra/order-print.service';
+
 import {filter} from 'rxjs/operators'
 
 @Component({
@@ -28,7 +30,9 @@ export class CreateCommandPageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private orderService: OrderService,
-    private productService: ProductService) { }
+    private productService: ProductService,
+    private orderPrintService: OrderPrintService
+  ) { }
 
   ngOnInit(): void {
     this.router.events.pipe(
@@ -126,7 +130,6 @@ export class CreateCommandPageComponent implements OnInit {
         this.totalHT = this.totalHT + Number(((selectedProduct.product.price * selectedProduct.quantity) / (1 + selectedProduct.product.tva / 100)));
       })
       this.order.totalHT = Number(this.totalHT.toFixed(2));
-      console.log(this.order)
       this.orderService.postOrder(this.order).subscribe(result => {
         this.orders = [result,...this.orders]
         this.order = {hour: null, mode: null, products: null, total:null, totalHT: null, client: null, table: null, cutlery: null};
@@ -137,6 +140,11 @@ export class CreateCommandPageComponent implements OnInit {
     } else {
       alert('La commande ne contient pas de produit')
     }
+  }
+
+  printTicket(order){
+    console.log(order)
+    this.orderPrintService.buildTicket(order);
   }
 
   deleteOrder(id){
