@@ -26,6 +26,7 @@ export class ClientFormComponent implements OnChanges{
   }
 
   saveOrder(){
+    console.log(this.commandForm)
     if(this.commandForm.valid){
       this.clientEmitter.emit(this.commandForm.value)
       this.commandForm.reset()
@@ -36,12 +37,13 @@ export class ClientFormComponent implements OnChanges{
     switch (this.mode){
       case 'LIVRAISON':
         this.commandForm = this.fb.group({
+          _id:[''],
           firstName: ['',[Validators.minLength(2)]],
           lastName:['',[Validators.required, Validators.minLength(2)]],
           address:['', [Validators.required, Validators.minLength(5)]],
           city: ['',[Validators.minLength(3)]],
           zipCode:['', [Validators.required,Validators.pattern('[0-9]{5}')]],
-          phoneNumber:['', [Validators.required, Validators.pattern(/^((\+)33|0)[1-9](\d{2}){4}$/g)]],
+          phoneNumber:['', [Validators.required, Validators.pattern('[0-9]{10}')]],
           cutlery:['', Validators.required],
           hour:['', [Validators.required]],
           table:['']
@@ -49,6 +51,7 @@ export class ClientFormComponent implements OnChanges{
         break;
       case 'EMPORTER':
         this.commandForm = this.fb.group({
+          _id:[''],
           firstName: ['',[Validators.minLength(2)]],
           lastName:['',[Validators.required, Validators.minLength(2)]],
           address:[''],
@@ -82,6 +85,7 @@ export class ClientFormComponent implements OnChanges{
   }
 
   setClient(client){
+    this.commandForm.controls._id.setValue(client._id);
     this.commandForm.controls.firstName.setValue(client.firstName);
     this.commandForm.controls.lastName.setValue(client.lastName);
     this.commandForm.controls.address.setValue(client.address);

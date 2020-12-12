@@ -2,10 +2,11 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    height: 90%; 
+    height: 90%;
     .button{
+        text-align: center;
         margin: 3px 0px 0px 3px;
         min-height: 70px;
-        width: 100px;
+        width: 120px;
     }
 }

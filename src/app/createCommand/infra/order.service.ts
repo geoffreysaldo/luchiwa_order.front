@@ -20,6 +20,10 @@ export class OrderService {
     return this.httpClient.get<Order[]>('http://localhost:3000/command/' + mode)
   }
 
+  getOrders(): Observable<Order[]>{
+    return this.httpClient.get<Order[]>('http://localhost:3000/command');
+  }
+
   delete(id:string):Observable<void>{
     return this.httpClient.delete<void>('http://localhost:3000/command/' + id)
   }

@@ -19,11 +19,15 @@
             </div>
             <mat-divider></mat-divider>
         </mat-list-item>
+        <button mat-raised-button color="primary" (click)="printOrder()">Imprimer</button>
         <button mat-raised-button color="warn" (click)="deleteOrder()">Supprimer</button>
     </div>
     <div class="total">
         <span>Couverts: {{order.cutlery}}</span>
-        <span>{{order.total| number:'1.2-2'}} €</span>
+        <div class="totals">
+          <div>Total HT: {{order.totalHT| number:'1.2-2'}} €</div>
+          <div class="totalTTC">Total TTC: {{order.total| number:'1.2-2'}} €</div>
+        </div>
     </div>
 </mat-card>
 <mat-card class="div_card" (click)="expandProduct()" *ngIf="mode === 'SUR_PLACE' && order.table">
@@ -40,10 +44,14 @@
             </div>
             <mat-divider></mat-divider>
         </mat-list-item>
+        <button mat-raised-button color="primary" (click)="printOrder()">Imprimer</button>
         <button mat-raised-button color="warn" (click)="deleteOrder()">Supprimer</button>
     </div>
     <div class="total">
         <span>Couverts: {{order.cutlery}}</span>
-        <span>{{order.total| number:'1.2-2'}} €</span>
+        <div class="totals">
+          <div>Total HT: {{order.totalHT| number:'1.2-2'}} €</div>
+          <div class="totalTTC">Total TTC: {{order.total| number:'1.2-2'}} €</div>
+        </div>
     </div>
 </mat-card>

@@ -10,11 +10,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
+import {MatInputModule} from '@angular/material/input';
 import { ProductFormComponent } from './components/product-form/product-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
     declarations:[ProductPageComponent, ProductFormComponent],
     imports: [
+        ReactiveFormsModule,
         CommonModule,
         HttpClientModule,
         ThemeModule,
@@ -24,6 +28,8 @@ import { ProductFormComponent } from './components/product-form/product-form.com
         MatButtonModule,
         MatGridListModule,
         MatListModule,
+        MatInputModule,
+        MatSelectModule,
     ],
 
 })

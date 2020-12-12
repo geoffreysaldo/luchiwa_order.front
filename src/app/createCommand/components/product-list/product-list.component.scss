@@ -7,9 +7,16 @@
 .mat-list{
     height: calc(100% - 35px);
     overflow-y: auto;
+    .mat-list-item{
+      height: 60px;
+    }
     .div_product{
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        margin-top: 3px;
+        margin-bottom: 3px;
+        height: 60px;
         .span_product{
             display: flex;
             flex-direction: row;
@@ -25,6 +32,9 @@
                     cursor: pointer
                 }
             }
+        }
+        .divider{
+          margin-top: 3px !important;
         }
         .span_sub_total{
             font-size: 12px;

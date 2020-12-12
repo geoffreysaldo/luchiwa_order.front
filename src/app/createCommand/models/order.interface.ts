@@ -11,4 +11,5 @@ export interface Order {
     cutlery: number;
     table?: number;
     total: number;
+    totalHT: number;
 }

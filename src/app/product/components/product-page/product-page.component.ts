@@ -10,6 +10,7 @@ import { ProductService } from '../../../theme/infra/product.service';
 })
 export class ProductPageComponent implements OnInit {
   categories: string[] = [];
+  currentCategory: string;
   products: ProductInterface[] = [];
   product: ProductInterface;
 
@@ -23,11 +24,34 @@ export class ProductPageComponent implements OnInit {
   }
 
   categoryChange($event){
-    this.productService.getProducts($event).subscribe(productsResult => this.products = productsResult)
+    this.productService.getProducts($event).subscribe(productsResult => {
+      this.products = productsResult;
+      this.currentCategory = $event;
+    });
+  }
+
+  selectedProduct($event){
+    this.product = $event
   }
 
   updateProduct($event){
-    this.product = $event
+    this.productService.updateProduct($event).subscribe(updatedProduct => {
+      this.products.filter(product => product._id === updatedProduct._id).map(product => {
+        product.price = updatedProduct.price;
+      });
+      console.log(updatedProduct.category, this.currentCategory)
+      if(updatedProduct.category !== this.currentCategory){
+        this.products = this.products.filter(product => product._id !== updatedProduct._id);
+      }
+    })
+  }
+
+  addProduct($event) {
+    this.productService.addProduct($event).subscribe(addedProduct => {
+      if(addedProduct.category === this.currentCategory) {
+        this.products.push(addedProduct);
+      }
+    })
   }
 
 }

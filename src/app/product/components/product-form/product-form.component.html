@@ -1,5 +1,52 @@
 <mat-card>
-    <h3 *ngIf="product" class="title"> Modifier {{product.name}}</h3>
-    <h3 *ngIf="!product" class="title"> Ajouter un produit</h3>
-
+    <h3 class="title" *ngIf="mode === 'UPDATE'"> Modifier {{_product.name}}</h3>
+    <h3 class="title" *ngIf="mode === 'ADD'"> Ajouter un produit</h3>
+    <form [formGroup]="formProduct" class="column">
+      <mat-form-field>
+          <mat-label>
+              Nom:
+          </mat-label>
+          <input matInput type="text" formControlName="name" [readonly]="getMode() === 'UPDATE'">
+      </mat-form-field>
+      <mat-form-field>
+          <mat-label>
+              Categorie:
+          </mat-label>
+          <mat-select formControlName="category">
+            <mat-form-field>
+        			<input matInput value="" #itemName>
+        		</mat-form-field>
+        		<button (click)="fireAddEvent(itemName.value)">Ajouter</button>
+            <mat-option *ngFor="let category of categories" [value]="category" >
+              {{category}}
+            </mat-option>
+          </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+          <mat-label>
+              Prix:
+          </mat-label>
+          <input matInput type="text" formControlName="price">
+      </mat-form-field>
+      <mat-form-field>
+          <mat-label>
+              TVA:
+          </mat-label>
+          <mat-select formControlName="tva">
+            <mat-option [value]="5" >
+              5%
+            </mat-option>
+            <mat-option [value]="10" >
+              10%
+            </mat-option>
+            <mat-option [value]="20" >
+              20%
+            </mat-option>
+          </mat-select>
+      </mat-form-field>
+    </form>
+    <div class="row">
+      <button mat-raised-button color="accent" (click)="cancel()">Annuler</button>
+      <button mat-raised-button color="primary" (click)="saveUpdate()">Enregistrer</button>
+    </div>
 </mat-card>

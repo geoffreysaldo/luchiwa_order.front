@@ -43,6 +43,14 @@
         flex-direction:row;
         justify-content: space-between;
     }
+    .totals {
+      display:flex;
+      flex-direction:column;
+      .totalTTC{
+        font-size: 14px;
+      }
+    }
+
 
 }
 

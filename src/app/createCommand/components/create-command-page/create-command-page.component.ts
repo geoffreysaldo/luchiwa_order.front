@@ -16,13 +16,14 @@ import {filter} from 'rxjs/operators'
 })
 export class CreateCommandPageComponent implements OnInit {
   mode: Mode;
-  order: Order = {hour: null, mode: null, products: null, total:null, client: null, table: null, cutlery: null};
+  order: Order = {hour: null, mode: null, products: null, total:null, totalHT: null, client: null, table: null, cutlery: null};
   orders: Order[];
   categories: string[] = [];
   products: ProductInterface[] = [];
   selectedProducts: ProductBagInterface[] = [];
   orderInformation: OrderInformation;
   totalTTC: number = 0;
+  totalHT: number = 0;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -31,7 +32,7 @@ export class CreateCommandPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)  
+      filter(event => event instanceof NavigationEnd)
         ).subscribe((event: NavigationEnd) => {
           this.setMode()
     });
@@ -84,7 +85,7 @@ export class CreateCommandPageComponent implements OnInit {
       case 'pick_up':
         this.mode = Mode.EMPORTER;
         break;
-      case 'on_site': 
+      case 'on_site':
         this.mode = Mode.SUR_PLACE
       break;
     }
@@ -121,11 +122,17 @@ export class CreateCommandPageComponent implements OnInit {
       this.order.mode = this.mode;
       this.order.products = this.selectedProducts;
       this.order.total = Number(this.totalTTC.toFixed(2));
+      this.order.products.map(selectedProduct => {
+        this.totalHT = this.totalHT + Number(((selectedProduct.product.price * selectedProduct.quantity) / (1 + selectedProduct.product.tva / 100)));
+      })
+      this.order.totalHT = Number(this.totalHT.toFixed(2));
+      console.log(this.order)
       this.orderService.postOrder(this.order).subscribe(result => {
         this.orders = [result,...this.orders]
-        this.order = {hour: null, mode: null, products: null, total:null, client: null, table: null, cutlery: null};
+        this.order = {hour: null, mode: null, products: null, total:null, totalHT: null, client: null, table: null, cutlery: null};
         this.selectedProducts = [];
         this.totalTTC = 0;
+        this.totalHT = 0
       })
     } else {
       alert('La commande ne contient pas de produit')

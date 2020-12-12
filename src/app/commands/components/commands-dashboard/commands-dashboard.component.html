@@ -1,0 +1,7 @@
+<mat-card class="mat-card-dashboard">
+  <div class="div_dashboard">
+    <app-order-list [mode]="'LIVRAISON'" [orders]="deliveries" (deleteEmitter)="deleteOrder($event)" class="orders_list"></app-order-list>
+    <app-order-list [mode]="'EMPORTER'" [orders]="pickUps" (deleteEmitter)="deleteOrder($event)" class="orders_list"></app-order-list>
+    <app-order-list [mode]="'SUR_PLACE'" [orders]="onSite" (deleteEmitter)="deleteOrder($event)" class="orders_list"></app-order-list>
+  </div>
+</mat-card>

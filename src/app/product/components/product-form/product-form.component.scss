@@ -6,3 +6,18 @@
 .title{
     font-weight: bold;;
 }
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+.mat-raised-button{
+  width: 48%;
+
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

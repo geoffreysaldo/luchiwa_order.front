@@ -1,5 +1,5 @@
 <div class="div_product">
     <app-category-slider [categories]="categories" (categoryEmitter)="categoryChange($event)"></app-category-slider>
-    <app-product-grid [products]="products" (productEmitter)="updateProduct($event)"></app-product-grid>
-    <app-product-form [product]="product"></app-product-form>
+    <app-product-grid [products]="products" (productEmitter)="selectedProduct($event)"></app-product-grid>
+    <app-product-form [product]="product" [categories]="categories" (updateEmitter)="updateProduct($event)" (addEmitter)="addProduct($event)"></app-product-form>
 </div>

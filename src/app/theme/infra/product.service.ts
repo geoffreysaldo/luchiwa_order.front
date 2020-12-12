@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { ProductInterface } from '../../createCommand/models/product.interface';
 
+
 @Injectable()
 export class ProductService {
 
@@ -14,5 +15,14 @@ export class ProductService {
 
   getProducts(category: string): Observable<ProductInterface[]>{
     return this.httpClient.get<ProductInterface[]>('http://localhost:3000/product/'+category)
+  }
+
+  addProduct(product: ProductInterface): Observable<ProductInterface>{
+    console.log(product)
+    return this.httpClient.post<ProductInterface>('http://localhost:3000/product/', product);
+  }
+
+  updateProduct(product: ProductInterface): Observable<ProductInterface>{
+    return this.httpClient.put<ProductInterface>('http://localhost:3000/product/', product);
   }
 }

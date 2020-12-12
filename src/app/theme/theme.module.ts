@@ -16,19 +16,22 @@ import {MatDividerModule} from '@angular/material/divider';
 import { CategorySliderComponent } from './components/category-slider/category-slider.component';
 import { ProductGridComponent } from './components/product-grid/product-grid.component';
 import { ProductService } from './infra/product.service';
+import { DatePipe } from '@angular/common';
+
 
 @NgModule({
     declarations:[HeaderComponent, OrderListComponent, OrderCardComponent, CategorySliderComponent, ProductGridComponent,],
     imports: [
         CommonModule,
-        ThemeRoutingModule, 
+        ThemeRoutingModule,
         MatCardModule,
         MatToolbarModule,
         MatButtonModule,
         MatListModule,
         MatIconModule,
         MatDividerModule,
-        MatGridListModule],
+        MatGridListModule,
+        ],
     exports:[
         HeaderComponent,
         OrderListComponent,
@@ -36,9 +39,10 @@ import { ProductService } from './infra/product.service';
         ProductGridComponent,
     ],
     providers:[
-        ProductService
+        ProductService,
+        DatePipe
     ]
-    
+
 })
 
 export class ThemeModule {}
