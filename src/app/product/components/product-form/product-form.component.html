@@ -12,15 +12,12 @@
           <mat-label>
               Categorie:
           </mat-label>
-          <mat-select formControlName="category">
-            <mat-form-field>
-        			<input matInput value="" #itemName>
-        		</mat-form-field>
-        		<button (click)="fireAddEvent(itemName.value)">Ajouter</button>
-            <mat-option *ngFor="let category of categories" [value]="category" >
-              {{category}}
+          <input matInput type="text" formControlName="category" [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of categories" [value]="option" class="option">
+              <span class="name">{{option}}</span>
             </mat-option>
-          </mat-select>
+          </mat-autocomplete>
       </mat-form-field>
       <mat-form-field>
           <mat-label>

@@ -51,6 +51,9 @@ export class ProductPageComponent implements OnInit {
       if(addedProduct.category === this.currentCategory) {
         this.products.push(addedProduct);
       }
+      if(!this.categories.includes(addedProduct.category)){
+        this.categories.push(addedProduct.category);
+      }
     })
   }
 

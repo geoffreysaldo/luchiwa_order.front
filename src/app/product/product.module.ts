@@ -14,6 +14,7 @@ import {MatInputModule} from '@angular/material/input';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
     declarations:[ProductPageComponent, ProductFormComponent],
@@ -30,6 +31,7 @@ import {MatSelectModule} from '@angular/material/select';
         MatListModule,
         MatInputModule,
         MatSelectModule,
+        MatAutocompleteModule,
     ],
 
 })
