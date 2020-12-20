@@ -26,65 +26,65 @@ export class OrderPrintService {
   public reducer = (accumulator, currentValue) => accumulator + currentValue;
 
   setPdfConfig() {
-    this.doc.setFontSize(6);
-    this.doc.setFont('Calibri');
+    this.doc.setFontSize(11);
+    //this.doc.setFont('Calibri');
   }
 
   setHeader() {
-    this.doc.text("L'UCHIWA",32,this.y);
-    this.doc.setFontSize(5);
-    this.y = this.y + 2;
-    this.doc.text("14 RUE GAMBETTA", 28,this.y);
-    this.y = this.y + 2;
-    this.doc.text("83500 La Seyne Sur Mer", 27, this.y);
+    this.doc.text("L'UCHIWA",30,this.y);
+    this.doc.setFontSize(10);
     this.y = this.y + 4;
-    this.doc.text("===============================================================", 5, this.y);
+    this.doc.text("14 RUE GAMBETTA", 26,this.y);
+    this.y = this.y + 4;
+    this.doc.text("83500 La Seyne Sur Mer", 25, this.y);
+    this.y = this.y + 6;
+    this.doc.text("========================================", 5, this.y);
   }
 
   setOrderDetails() {
     const now = new Date();
-    this.y = this.y + 4;
+    this.y = this.y + 6;
     this.doc.text(this.order.mode,5,this.y);
-    this.y = this.y + 2;
-    this.doc.text("Date reçue: "+ this.datepipe.transform(now, 'dd/MM/yyyy').toString() + " heure: " + now.getHours().toString() + ':' + now.getMinutes().toString() + ':'+  now.getSeconds().toString(),5,this.y);
-    this.y = this.y + 2;
-    this.order.mode === 'LIVRAISON' ? this.doc.text('Horaire livraison: '+ this.order.hour, 5, this.y) : this.doc.text('Horaire livraison: '+ this.order.hour, 5, this.y)
     this.y = this.y + 4;
-    this.doc.text("===================================================== Devise EUR", 5, this.y);
+    this.doc.text("Date reçue: "+ this.datepipe.transform(now, 'dd/MM/yyyy').toString() + " heure: " + now.getHours().toString() + ':' + now.getMinutes().toString() + ':'+  now.getSeconds().toString(),5,this.y);
+    this.y = this.y + 4;
+    this.order.mode === 'LIVRAISON' ? this.doc.text('Horaire livraison: '+ this.order.hour, 5, this.y) : this.doc.text('Horaire livraison: '+ this.order.hour, 5, this.y)
+    this.y = this.y + 6;
+    this.doc.text("======================== Devise EUR", 5, this.y);
   }
 
   setProductsLines() {
-    this.y = this.y + 2;
+    this.y = this.y + 4;
     this.order.products.map((item,index) => {
       this.doc.text(item.quantity+" x "+item.product.name,5,this.y);
       this.doc.text((item.product.price*item.quantity).toFixed(2),60,this.y);
-      this.y = this.y + 2;
+      this.y = this.y + 4;
     })
-    this.doc.text("----------------------------------------------- "+this.order.products.length+" article(s) ----------------------------------------------", 5, this.y);
+    this.doc.text("----------------------- "+this.order.products.length+" article(s) -----------------------", 5, this.y);
   }
 
   setTotals() {
-    this.y = this.y + 2;
+    this.y = this.y + 4;
     this.doc.text("Total HT",5,this.y);
     this.doc.text(this.order.totalHT.toString(), 60, this.y);
-    this.y = this.y + 2;
+    this.y = this.y + 4;
     this.doc.text("Total TVA",5,this.y);
     this.doc.text((this.order.total - this.order.totalHT).toFixed(2), 60, this.y);
-    this.y = this.y + 2;
-    this.doc.setFontSize(6);
+    this.y = this.y + 4;
+    this.doc.setFontSize(11);
     this.doc.text("Total TTC (Eur)",5,this.y);
     this.doc.text(this.order.total.toFixed(2), 60, this.y);
-    this.doc.setFontSize(5);
-    this.y = this.y + 2;
-    this.doc.text("-----------------------------------------------------------------------------------------------------------", 5, this.y);
+    this.doc.setFontSize(10);
+    this.y = this.y + 4;
+    this.doc.text("-------------------------------------------------------------", 5, this.y);
   }
 
   setTaxes() {
-    this.y = this.y + 2;
+    this.y = this.y + 4;
     this.doc.text("TVA %",5,this.y);
-    this.doc.text("CA HT Eur",30,this.y);
-    this.doc.text("Mnt TVA Eur",57,this.y);
-    this.y = this.y + 2
+    this.doc.text("CA HT Eur",27,this.y);
+    this.doc.text("Mnt TVA Eur",51,this.y);
+    this.y = this.y + 4
     let taxRateArray: number[] = [];
     let totalHT: number[] = [];
     let totalTax: number[] = [];
@@ -107,6 +107,7 @@ export class OrderPrintService {
   }
 
   save() {
+    this.doc.text('',60,this.y+20);
     this.doc.save("hello.pdf");
   }
 
