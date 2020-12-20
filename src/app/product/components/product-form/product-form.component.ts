@@ -42,11 +42,6 @@ export class ProductFormComponent implements OnInit {
 
   }
 
-  fireAddEvent($event){
-    console.log($event);
-    this.categories.push($event)
-  }
-
   getMode() {
     return this.mode;
   }

@@ -4,7 +4,9 @@
     overflow-y: auto;
     height: 90%;
     .button{
-        text-align: center;
+        text-align: center !important;
+        white-space: normal;
+        line-height:normal;
         margin: 3px 0px 0px 3px;
         min-height: 70px;
         width: 120px;
