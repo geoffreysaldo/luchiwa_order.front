@@ -32,12 +32,12 @@ export class OrderPrintService {
   }
 
   setHeader() {
-    this.doc.text("L'UZUMAKI",25,this.y);
+    this.doc.text("L'UZUMAKI",30,this.y);
     this.doc.setFontSize(10);
     this.y = this.y + 4;
-    this.doc.text("ZAC LES BARLES", 21,this.y);
+    this.doc.text("ZAC LES BARLES", 26,this.y);
     this.y = this.y + 4;
-    this.doc.text("13470 CARNOUX EN PROVENCE", 9, this.y);
+    this.doc.text("13470 CARNOUX EN PROVENCE", 14, this.y);
     this.y = this.y + 6;
     this.doc.text("========================================", 5, this.y);
   }
@@ -45,7 +45,7 @@ export class OrderPrintService {
   setOrderDetails() {
     const now = new Date();
     this.y = this.y + 6;
-    this.doc.text("Date reçue: "+ this.datepipe.transform(now, 'dd/MM/yyyy').toString() + " heure: " + now.getHours().toString() + ':' + now.getMinutes().toString() + ':'+  now.getSeconds().toString(),5,this.y);
+    this.doc.text("Date: "+ this.datepipe.transform(now, 'dd/MM/yyyy').toString() + " heure: " + now.getHours().toString() + ':' + now.getMinutes().toString() + ':'+  now.getSeconds().toString(),5,this.y);
     this.y = this.y + 4;
     this.doc.text(this.order.mode + " " +  this.order.hour,5,this.y);
     this.y = this.y + 4;
@@ -58,9 +58,9 @@ export class OrderPrintService {
       this.doc.text(this.order.client.address + ", " + this.order.client.zipCode, 5, this.y);
       this.y = this.y + 4;
       this.doc.text(this.order.client.city, 5, this.y);
-    } 
+    }
     this.y = this.y + 6;
-    this.doc.text("======================== Devise EUR", 5, this.y);
+    this.doc.text("====================== Devise EUR", 5, this.y);
   }
 
   setProductsLines() {
@@ -119,8 +119,9 @@ export class OrderPrintService {
 
   save() {
     const now = new Date()
-    this.doc.text('',60,this.y+20);
+    this.doc.text('',60,this.y+40);
     this.doc.save(this.datepipe.transform(now, 'dd/MM/yyyy').toString()+"_"+now.getHours().toString()+"_"+now.getMinutes().toString()+".pdf");
+    this.y = 10;
   }
 
 
