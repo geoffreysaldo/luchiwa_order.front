@@ -12,6 +12,7 @@ export class OrderPrintService {
   constructor(private datepipe: DatePipe) { }
 
   buildTicket(order) {
+    console.log(order)
     this.order = order;
     this.doc = new jsPDF('p', 'mm', [72, 210]);
     this.setPdfConfig();
@@ -31,12 +32,12 @@ export class OrderPrintService {
   }
 
   setHeader() {
-    this.doc.text("L'UCHIWA",30,this.y);
+    this.doc.text("L'UZUMAKI",25,this.y);
     this.doc.setFontSize(10);
     this.y = this.y + 4;
-    this.doc.text("14 RUE GAMBETTA", 26,this.y);
+    this.doc.text("ZAC LES BARLES", 21,this.y);
     this.y = this.y + 4;
-    this.doc.text("83500 La Seyne Sur Mer", 25, this.y);
+    this.doc.text("13470 CARNOUX EN PROVENCE", 9, this.y);
     this.y = this.y + 6;
     this.doc.text("========================================", 5, this.y);
   }
@@ -44,11 +45,20 @@ export class OrderPrintService {
   setOrderDetails() {
     const now = new Date();
     this.y = this.y + 6;
-    this.doc.text(this.order.mode,5,this.y);
-    this.y = this.y + 4;
     this.doc.text("Date reçue: "+ this.datepipe.transform(now, 'dd/MM/yyyy').toString() + " heure: " + now.getHours().toString() + ':' + now.getMinutes().toString() + ':'+  now.getSeconds().toString(),5,this.y);
     this.y = this.y + 4;
-    this.order.mode === 'LIVRAISON' ? this.doc.text('Horaire livraison: '+ this.order.hour, 5, this.y) : this.doc.text('Horaire livraison: '+ this.order.hour, 5, this.y)
+    this.doc.text(this.order.mode + " " +  this.order.hour,5,this.y);
+    this.y = this.y + 4;
+    this.doc.text(this.order.client.firstName + " " + this.order.client.lastName, 5, this.y)
+    this.y = this.y + 4;
+    this.doc.text(this.order.client.phoneNumber, 5, this.y)
+    //this.order.mode === 'LIVRAISON' ? this.doc.text('Livraison: '+, 5, this.y) : this.doc.text('À EMPORTER : '+ this.order.hour, 5, this.y)
+    if(this.order.mode === 'LIVRAISON'){
+      this.y = this.y + 4;
+      this.doc.text(this.order.client.address + ", " + this.order.client.zipCode, 5, this.y);
+      this.y = this.y + 4;
+      this.doc.text(this.order.client.city, 5, this.y);
+    } 
     this.y = this.y + 6;
     this.doc.text("======================== Devise EUR", 5, this.y);
   }
@@ -100,15 +110,17 @@ export class OrderPrintService {
       totalTax.push(totalByTax)
     })
     taxRateArray.map((item,index) => {
-      this.doc.text(item.toFixed(2),5,this.y+(index)*2);
-      this.doc.text(totalHT[index].toFixed(2),32,this.y+(index)*2);
-      this.doc.text(totalTax[index].toFixed(2),60,this.y+(index)*2);
+      this.doc.text(item.toFixed(2),5,this.y);
+      this.doc.text(totalHT[index].toFixed(2),32,this.y);
+      this.doc.text(totalTax[index].toFixed(2),60,this.y);
+      this.y = this.y + 4;
     })
   }
 
   save() {
+    const now = new Date()
     this.doc.text('',60,this.y+20);
-    this.doc.save("hello.pdf");
+    this.doc.save(this.datepipe.transform(now, 'dd/MM/yyyy').toString()+"_"+now.getHours().toString()+"_"+now.getMinutes().toString()+".pdf");
   }
 
 

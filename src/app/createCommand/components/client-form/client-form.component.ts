@@ -26,7 +26,7 @@ export class ClientFormComponent implements OnChanges{
   }
 
   saveOrder(){
-    console.log(this.commandForm)
+    //console.log(this.commandForm)
     if(this.commandForm.valid){
       this.clientEmitter.emit(this.commandForm.value)
       this.commandForm.reset()

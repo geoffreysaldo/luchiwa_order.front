@@ -123,6 +123,7 @@ export class CreateCommandPageComponent implements OnInit {
           delete this.order.client;
           break;
       }
+      this.totalHT = 0;
       this.order.mode = this.mode;
       this.order.products = this.selectedProducts;
       this.order.total = Number(this.totalTTC.toFixed(2));
