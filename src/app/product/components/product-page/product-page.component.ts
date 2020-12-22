@@ -57,4 +57,10 @@ export class ProductPageComponent implements OnInit {
     })
   }
 
+  deleteProduct($event){
+    this.productService.deleteProduct($event._id).subscribe((res) => {
+      this.products = this.products.filter(product => product._id !== $event._id)
+    })
+  }
+
 }

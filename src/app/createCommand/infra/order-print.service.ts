@@ -28,7 +28,6 @@ export class OrderPrintService {
 
   setPdfConfig() {
     this.doc.setFontSize(11);
-    //this.doc.setFont('Calibri');
   }
 
   setHeader() {
@@ -45,7 +44,7 @@ export class OrderPrintService {
   setOrderDetails() {
     const now = new Date();
     this.y = this.y + 6;
-    this.doc.text("Date reçue: "+ this.datepipe.transform(now, 'dd/MM/yyyy').toString() + " heure: " + now.getHours().toString() + ':' + now.getMinutes().toString() + ':'+  now.getSeconds().toString(),5,this.y);
+    this.doc.text("Date: "+ this.datepipe.transform(now, 'dd/MM/yyyy').toString() + " heure: " + now.getHours().toString() + ':' + now.getMinutes().toString() + ':'+  now.getSeconds().toString(),5,this.y);
     this.y = this.y + 4;
     this.doc.text(this.order.mode + " " +  this.order.hour,5,this.y);
     this.y = this.y + 4;
@@ -119,8 +118,9 @@ export class OrderPrintService {
 
   save() {
     const now = new Date()
-    this.doc.text('',60,this.y+20);
+    this.doc.text("-------------------------------------------------------------", 5, this.y + 20);
     this.doc.save(this.datepipe.transform(now, 'dd/MM/yyyy').toString()+"_"+now.getHours().toString()+"_"+now.getMinutes().toString()+".pdf");
+    this.y = 10;
   }
 
 

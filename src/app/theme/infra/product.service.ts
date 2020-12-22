@@ -25,4 +25,8 @@ export class ProductService {
   updateProduct(product: ProductInterface): Observable<ProductInterface>{
     return this.httpClient.put<ProductInterface>('http://localhost:3000/product/', product);
   }
+
+  deleteProduct(id:string){
+    return this.httpClient.delete('http://localhost:3000/product/'+ id);
+  }
 }

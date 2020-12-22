@@ -42,8 +42,9 @@
           </mat-select>
       </mat-form-field>
     </form>
-    <div class="row">
-      <button mat-raised-button color="accent" (click)="cancel()">Annuler</button>
-      <button mat-raised-button color="primary" (click)="saveUpdate()">Enregistrer</button>
+    <div class="column">
+      <button class="button" mat-raised-button color="primary" (click)="saveUpdate()">Enregistrer</button>
+      <button *ngIf="mode === 'UPDATE'" class="button" mat-raised-button color="accent" (click)="delete()">Supprimer</button>
+      <button *ngIf="mode === 'UPDATE'" class="button" mat-raised-button color="warn" (click)="cancel()">Annuler</button>
     </div>
 </mat-card>
