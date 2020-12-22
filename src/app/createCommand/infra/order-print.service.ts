@@ -31,12 +31,12 @@ export class OrderPrintService {
   }
 
   setHeader() {
-    this.doc.text("L'UZUMAKI",25,this.y);
+    this.doc.text("L'UZUMAKI",30,this.y);
     this.doc.setFontSize(10);
     this.y = this.y + 4;
-    this.doc.text("ZAC LES BARLES", 21,this.y);
+    this.doc.text("ZAC LES BARLES", 26,this.y);
     this.y = this.y + 4;
-    this.doc.text("13470 CARNOUX EN PROVENCE", 9, this.y);
+    this.doc.text("13470 CARNOUX EN PROVENCE", 14, this.y);
     this.y = this.y + 6;
     this.doc.text("========================================", 5, this.y);
   }
@@ -57,9 +57,9 @@ export class OrderPrintService {
       this.doc.text(this.order.client.address + ", " + this.order.client.zipCode, 5, this.y);
       this.y = this.y + 4;
       this.doc.text(this.order.client.city, 5, this.y);
-    } 
+    }
     this.y = this.y + 6;
-    this.doc.text("======================== Devise EUR", 5, this.y);
+    this.doc.text("====================== Devise EUR", 5, this.y);
   }
 
   setProductsLines() {
@@ -118,7 +118,11 @@ export class OrderPrintService {
 
   save() {
     const now = new Date()
+<<<<<<< HEAD
     this.doc.text("-------------------------------------------------------------", 5, this.y + 20);
+=======
+    this.doc.text('',60,this.y+40);
+>>>>>>> 6308a1df23f3b33f8844545bd78bc7514dd3628b
     this.doc.save(this.datepipe.transform(now, 'dd/MM/yyyy').toString()+"_"+now.getHours().toString()+"_"+now.getMinutes().toString()+".pdf");
     this.y = 10;
   }
