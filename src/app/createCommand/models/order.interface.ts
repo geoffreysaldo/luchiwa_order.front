@@ -12,4 +12,5 @@ export interface Order {
     table?: number;
     total: number;
     totalHT: number;
+    discount: number;
 }

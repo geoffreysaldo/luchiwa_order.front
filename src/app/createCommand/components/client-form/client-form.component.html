@@ -63,11 +63,22 @@
             </mat-label>
             <input matInput type="number" formControlName="cutlery">
         </mat-form-field>
-        <mat-form-field *ngIf="this.mode === 'LIVRAISON' || this.mode === 'EMPORTER'">
+        <mat-form-field *ngIf="this.mode === 'LIVRAISON' || this.mode === 'EMPORTER' || 'SUR_PLACE'">
             <mat-label>
                 Heure:
             </mat-label>
             <input matInput type="time" formControlName="hour">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>
+                Réduction:
+            </mat-label>
+            <input matInput type="text" formControlName="discount" [matAutocomplete]="auto" value="10">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option [value]="10">
+                <span class="name">10%</span>
+              </mat-option>
+            </mat-autocomplete>
         </mat-form-field>
     </form>
     <button mat-raised-button color="primary" (click)="saveOrder()">Enregistrer la commande</button>

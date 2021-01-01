@@ -13,6 +13,7 @@ import { OrderService } from '../../infra/order.service';
 export class ClientFormComponent implements OnChanges{
   @Input() mode
   @Output() clientEmitter = new EventEmitter();
+  @Output() sendDiscount = new EventEmitter();
 
   commandForm: FormGroup;
   filteredOptions: any[];
@@ -23,11 +24,15 @@ export class ClientFormComponent implements OnChanges{
 
   ngOnChanges(){
     this.buildForm();
+    this.commandForm.controls.discount.valueChanges.subscribe(value => {
+      this.sendDiscountAction(value);
+    })
   }
 
   saveOrder(){
     //console.log(this.commandForm)
     if(this.commandForm.valid){
+      console.log(this.commandForm.value)
       this.clientEmitter.emit(this.commandForm.value)
       this.commandForm.reset()
     }
@@ -46,7 +51,8 @@ export class ClientFormComponent implements OnChanges{
           phoneNumber:['', [Validators.required, Validators.pattern('[0-9]{10}')]],
           cutlery:['', Validators.required],
           hour:['', [Validators.required]],
-          table:['']
+          table:[''],
+          discount:[0,[Validators.required]],
         })
         break;
       case 'EMPORTER':
@@ -60,7 +66,8 @@ export class ClientFormComponent implements OnChanges{
           phoneNumber:['', [Validators.required, Validators.pattern(/^((\+)33|0)[1-9](\d{2}){4}$/g)]],
           cutlery:['', Validators.required],
           hour:['', [Validators.required]],
-          table:['']
+          table:[''],
+          discount:[0,[Validators.required]],
         })
         break;
       case 'SUR_PLACE':
@@ -74,6 +81,7 @@ export class ClientFormComponent implements OnChanges{
           cutlery:['', Validators.required],
           hour:[''],
           table:['', Validators.required],
+          discount:[0,[Validators.required]],
           })
         break;
       };
@@ -92,6 +100,10 @@ export class ClientFormComponent implements OnChanges{
     this.commandForm.controls.zipCode.setValue(client.zipCode);
     this.commandForm.controls.city.setValue(client.city);
     this.commandForm.controls.phoneNumber.setValue(client.phoneNumber);
+  }
+
+  sendDiscountAction(value) {
+    this.sendDiscount.emit(value)
   }
 
 }

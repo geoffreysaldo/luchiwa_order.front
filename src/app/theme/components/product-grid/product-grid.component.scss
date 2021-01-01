@@ -6,17 +6,21 @@
         overflow-y: auto;
         .button{
             margin: 2px;
-            height: 70px;
+            height: 80px;
             width: 150px;
-            text-align: center;
             .div_button{
                 display: flex;
                 flex-direction: column;
                 justify-content: space-around;
                 .name{
+                  height: 32px;
+                  margin-top: 10px;
                   display:flex;
                   flex-direction: row;
                   justify-content: center;
+                  text-align: center !important;
+                  white-space: normal;
+                  line-height:normal;
                 }
                 .price{
                     display: flex;

@@ -12,6 +12,7 @@ enum Action{
 })
 export class ProductListComponent implements OnChanges {
   @Input() selectedProducts;
+  @Input() discount;
   @Input() totalTTC;
   @Output() productEmitter = new EventEmitter();
   constructor() { }

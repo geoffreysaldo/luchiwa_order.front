@@ -1,10 +1,10 @@
 <mat-toolbar color="primary" class="mat-toolbar">
     <img src="assets/logo_luzumaki.png" class="logo">
     <div class="links">
-      <div class="div_link"><a [routerLink]="['commands']" class="link">Commandes</a></div>
-      <div class="div_link"><a [routerLink]="['create_command/delivery']" class="link">Livraison</a></div>
-      <div class="div_link"><a [routerLink]="['create_command/pick_up']" class="link">Emporter</a></div>
-      <div class="div_link"><a [routerLink]="['create_command/on_site']" class="link">Sur place</a></div>
-      <div class="div_link"><a [routerLink]="['product']" class="link">Produits</a></div>
+      <div class="div_link" (click)="setPart('commands')"><a [ngClass]="{'orange': state === 'commands'}" [routerLink]="['commands']" class="link">Commandes</a></div>
+      <div class="div_link" (click)="setPart('delivery')"><a [ngClass]="{'orange': state === 'delivery'}" [routerLink]="['create_command/delivery']" class="link">Livraison</a></div>
+      <div class="div_link" (click)="setPart('pickUp')"><a [ngClass]="{'orange': state === 'pickUp'}" [routerLink]="['create_command/pick_up']" class="link">Emporter</a></div>
+      <div class="div_link" (click)="setPart('onSite')"><a [ngClass]="{'orange': state === 'onSite'}" [routerLink]="['create_command/on_site']" class="link">Sur place</a></div>
+      <div class="div_link" (click)="setPart('products')"><a [ngClass]="{'orange': state === 'products'}"[routerLink]="['product']" class="link">Produits</a></div>
     </div>
 </mat-toolbar>

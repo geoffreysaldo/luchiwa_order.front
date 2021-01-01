@@ -16,6 +16,9 @@
     </mat-list>
     <div class="div_total">
         <mat-divider class="last_divider"></mat-divider>
-        <div class="span_total">Total TTC : {{totalTTC | number:'1.2-2'}}€</div>
+        <div class="span_total">
+            Total TTC : {{totalTTC - (totalTTC*discount)/100| number:'1.2-2'}}€
+            <span *ngIf="discount > 0">(-{{discount}}%)</span>
+        </div>
     </div>
 </mat-card>

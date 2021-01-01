@@ -18,7 +18,7 @@ import {filter} from 'rxjs/operators'
 })
 export class CreateCommandPageComponent implements OnInit {
   mode: Mode;
-  order: Order = {hour: null, mode: null, products: null, total:null, totalHT: null, client: null, table: null, cutlery: null};
+  order: Order = {hour: null, mode: null, products: null, total:null, totalHT: null, client: null, table: null, cutlery: null, discount: null};
   orders: Order[];
   categories: string[] = [];
   products: ProductInterface[] = [];
@@ -26,6 +26,7 @@ export class CreateCommandPageComponent implements OnInit {
   orderInformation: OrderInformation;
   totalTTC: number = 0;
   totalHT: number = 0;
+  discount: number = 0;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -99,41 +100,50 @@ export class CreateCommandPageComponent implements OnInit {
   }
 
   setOrderInformation($event){
+    console.log($event.discount)
     if(this.totalTTC !== 0) {
       switch (this.mode){
         case 'LIVRAISON':
           this.order.cutlery = $event.cutlery;
           this.order.hour = $event.hour;
+          this.order.discount = $event.discount;
           delete $event.hour;
           delete $event.cutlery;
+          delete $event.discount
           this.order.client = $event;
           delete this.order.table;
           break;
         case 'EMPORTER':
           this.order.hour = $event.hour;
           this.order.cutlery = $event.cutlery;
+          this.order.discount = $event.discount;
           delete $event.hour;
           delete $event.cutlery;
+          delete $event.discount
           this.order.client = $event;
           delete this.order.table;
           break;
         case 'SUR_PLACE':
           this.order.cutlery = $event.cutlery;
           this.order.table = $event.table;
+          this.order.discount = $event.discount;
+          delete $event.discount
           delete this.order.client;
           break;
       }
       this.totalHT = 0;
       this.order.mode = this.mode;
       this.order.products = this.selectedProducts;
+      this.totalTTC = this.totalTTC - ((this.totalTTC * this.discount) / (100))
       this.order.total = Number(this.totalTTC.toFixed(2));
       this.order.products.map(selectedProduct => {
         this.totalHT = this.totalHT + Number(((selectedProduct.product.price * selectedProduct.quantity) / (1 + selectedProduct.product.tva / 100)));
       })
+      this.totalHT = this.totalHT - ((this.totalHT * this.discount) / (100))
       this.order.totalHT = Number(this.totalHT.toFixed(2));
       this.orderService.postOrder(this.order).subscribe(result => {
         this.orders = [result,...this.orders]
-        this.order = {hour: null, mode: null, products: null, total:null, totalHT: null, client: null, table: null, cutlery: null};
+        this.order = {hour: null, mode: null, products: null, total:null, totalHT: null, client: null, table: null, cutlery: null, discount: null};
         this.selectedProducts = [];
         this.totalTTC = 0;
         this.totalHT = 0
@@ -152,5 +162,9 @@ export class CreateCommandPageComponent implements OnInit {
     this.orderService.delete(id).subscribe(() => {
       this.orders = this.orders.filter(order => order._id !== id)
     })
+  }
+
+  setDiscount($event) {
+    this.discount = $event
   }
 }

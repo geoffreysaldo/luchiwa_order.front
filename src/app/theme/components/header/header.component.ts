@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+  state: string;
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  setPart(event){
+    console.log(event)
+    this.state = event;
   }
 
 }
