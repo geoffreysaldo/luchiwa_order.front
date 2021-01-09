@@ -50,6 +50,10 @@ export class OrderPrintService {
     this.y = this.y + 6;
     this.doc.text(this.order.mode + " " +  this.order.hour,10,this.y);
     this.y = this.y + 6;
+    this.order.payment ? this.doc.text("Paiement: " + this.order.payment,10,this.y) : null;
+    this.y = this.y + 6;
+    this.order.payment ? this.doc.text("Couverts: " + this.order.cutlery,10,this.y) : null;
+    this.y = this.y + 6;
     this.doc.text(this.order.client.firstName + " " + this.order.client.lastName, 10, this.y)
     this.y = this.y + 6;
     this.doc.text(this.order.client.phoneNumber, 10, this.y)

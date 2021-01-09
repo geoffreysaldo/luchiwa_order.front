@@ -25,7 +25,6 @@ export class OrderCardComponent implements OnInit {
   }
 
   printOrder() {
-    console.log(this.order)
     this.printTicketEmitter.emit(this.order);
   }
 }

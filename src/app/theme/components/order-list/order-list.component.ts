@@ -31,7 +31,6 @@ export class OrderListComponent implements OnChanges {
   }
 
   printTicket(order) {
-    console.log(order)
     this.printTicketEmitter.emit(order);
   }
 }

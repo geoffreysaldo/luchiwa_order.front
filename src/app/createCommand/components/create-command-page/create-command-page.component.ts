@@ -18,7 +18,7 @@ import {filter} from 'rxjs/operators'
 })
 export class CreateCommandPageComponent implements OnInit {
   mode: Mode;
-  order: Order = {hour: null, mode: null, products: null, total:null, totalHT: null, client: null, table: null, cutlery: null, discount: null};
+  order: Order = {hour: null, mode: null, products: null, total:null, totalHT: null, client: null, table: null, cutlery: null, discount: null, payment: null,};
   orders: Order[];
   categories: string[] = [];
   products: ProductInterface[] = [];
@@ -100,13 +100,14 @@ export class CreateCommandPageComponent implements OnInit {
   }
 
   setOrderInformation($event){
-    console.log($event.discount)
     if(this.totalTTC !== 0) {
       switch (this.mode){
         case 'LIVRAISON':
           this.order.cutlery = $event.cutlery;
           this.order.hour = $event.hour;
           this.order.discount = $event.discount;
+          this.order.payment = $event.payment
+          delete $event.payment;
           delete $event.hour;
           delete $event.cutlery;
           delete $event.discount
@@ -117,6 +118,8 @@ export class CreateCommandPageComponent implements OnInit {
           this.order.hour = $event.hour;
           this.order.cutlery = $event.cutlery;
           this.order.discount = $event.discount;
+          this.order.payment = $event.payment
+          delete $event.payment;
           delete $event.hour;
           delete $event.cutlery;
           delete $event.discount
@@ -127,6 +130,8 @@ export class CreateCommandPageComponent implements OnInit {
           this.order.cutlery = $event.cutlery;
           this.order.table = $event.table;
           this.order.discount = $event.discount;
+          this.order.payment = $event.payment
+          delete $event.payment;
           delete $event.discount
           delete this.order.client;
           break;
@@ -143,7 +148,7 @@ export class CreateCommandPageComponent implements OnInit {
       this.order.totalHT = Number(this.totalHT.toFixed(2));
       this.orderService.postOrder(this.order).subscribe(result => {
         this.orders = [result,...this.orders]
-        this.order = {hour: null, mode: null, products: null, total:null, totalHT: null, client: null, table: null, cutlery: null, discount: null};
+        this.order = {hour: null, mode: null, products: null, total:null, totalHT: null, client: null, table: null, cutlery: null, discount: null, payment: null};
         this.selectedProducts = [];
         this.totalTTC = 0;
         this.totalHT = 0
@@ -154,7 +159,6 @@ export class CreateCommandPageComponent implements OnInit {
   }
 
   printTicket(order){
-    console.log(order)
     this.orderPrintService.buildTicket(order);
   }
 

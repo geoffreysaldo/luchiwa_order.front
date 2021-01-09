@@ -17,6 +17,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { OrderService } from './infra/order.service';
 import { OrderPrintService } from './infra/order-print.service';
 import {ThemeModule} from '../theme/theme.module';
+import {MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
     declarations: [CreateCommandPageComponent, ProductListComponent, ClientFormComponent],
@@ -32,7 +34,9 @@ import {ThemeModule} from '../theme/theme.module';
         MatListModule,
         MatIconModule,
         MatInputModule,
+        MatSelectModule,
         ReactiveFormsModule,
+        MatFormFieldModule,
         ThemeModule],
     exports: [],
     providers: [

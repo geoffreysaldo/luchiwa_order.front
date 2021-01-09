@@ -80,6 +80,13 @@
               </mat-option>
             </mat-autocomplete>
         </mat-form-field>
+        <mat-form-field>
+            <mat-label>Paiement</mat-label>
+            <mat-select formControlName="payment">
+              <mat-option value="Espèces">Espèces</mat-option>
+              <mat-option value="CB">CB</mat-option>
+            </mat-select>
+        </mat-form-field>
     </form>
     <button mat-raised-button color="primary" (click)="saveOrder()">Enregistrer la commande</button>
 </mat-card>

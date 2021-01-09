@@ -13,7 +13,6 @@ export class HeaderComponent implements OnInit {
   }
 
   setPart(event){
-    console.log(event)
     this.state = event;
   }
 

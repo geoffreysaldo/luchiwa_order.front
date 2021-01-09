@@ -30,7 +30,6 @@ export class ClientFormComponent implements OnChanges{
   }
 
   saveOrder(){
-    //console.log(this.commandForm)
     if(this.commandForm.valid){
       console.log(this.commandForm.value)
       this.clientEmitter.emit(this.commandForm.value)
@@ -42,7 +41,6 @@ export class ClientFormComponent implements OnChanges{
     switch (this.mode){
       case 'LIVRAISON':
         this.commandForm = this.fb.group({
-          _id:[''],
           firstName: ['',[Validators.minLength(2)]],
           lastName:['',[Validators.required, Validators.minLength(2)]],
           address:['', [Validators.required, Validators.minLength(5)]],
@@ -53,11 +51,11 @@ export class ClientFormComponent implements OnChanges{
           hour:['', [Validators.required]],
           table:[''],
           discount:[0,[Validators.required]],
+          payment:['Espèces', []]
         })
         break;
       case 'EMPORTER':
         this.commandForm = this.fb.group({
-          _id:[''],
           firstName: ['',[Validators.minLength(2)]],
           lastName:['',[Validators.required, Validators.minLength(2)]],
           address:[''],
@@ -67,7 +65,8 @@ export class ClientFormComponent implements OnChanges{
           cutlery:['', Validators.required],
           hour:['', [Validators.required]],
           table:[''],
-          discount:[0,[Validators.required]],
+          discount:[10,[Validators.required]],
+          payment:['Espèces', []]
         })
         break;
       case 'SUR_PLACE':
@@ -82,6 +81,7 @@ export class ClientFormComponent implements OnChanges{
           hour:[''],
           table:['', Validators.required],
           discount:[0,[Validators.required]],
+          payment:['Espèces', []]
           })
         break;
       };

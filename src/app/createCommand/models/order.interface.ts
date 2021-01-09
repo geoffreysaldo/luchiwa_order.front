@@ -13,4 +13,5 @@ export interface Order {
     total: number;
     totalHT: number;
     discount: number;
+    payment?: string;
 }
