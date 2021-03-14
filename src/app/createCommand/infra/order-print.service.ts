@@ -70,7 +70,7 @@ export class OrderPrintService {
   }
 
   setProductsLines() {
-    this.doc.setFontSize(14);
+    this.doc.setFontSize(16);
     this.y = this.y + 7;
     this.order.products.map((item,index) => {
       this.doc.text(item.quantity+" x "+item.product.name,10,this.y);
