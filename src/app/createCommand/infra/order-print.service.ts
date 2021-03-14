@@ -74,7 +74,7 @@ export class OrderPrintService {
     this.y = this.y + 7;
     this.order.products.map((item,index) => {
       this.doc.text(item.quantity+" x "+item.product.name,10,this.y);
-      this.doc.text((item.product.price*item.quantity).toFixed(2),105,this.y);
+      this.doc.text((item.product.price*item.quantity).toFixed(2),100,this.y);
       this.y = this.y + 8;
     })
     this.y = this.y - 1
@@ -87,16 +87,17 @@ export class OrderPrintService {
       this.doc.text("Remise",10,this.y);
       this.doc.text(this.order.discount.toString() + "%", 90, this.y);
     }
+    this.doc.setFontSize(16);
     this.y = this.y + 9;
     this.doc.text("Total HT",10,this.y);
-    this.doc.text(this.order.totalHT.toString(), 90, this.y);
+    this.doc.text(this.order.totalHT.toString(), 100, this.y);
     this.y = this.y + 9;
     this.doc.text("Total TVA",10,this.y);
-    this.doc.text((this.order.total - this.order.totalHT).toFixed(2), 90, this.y);
+    this.doc.text((this.order.total - this.order.totalHT).toFixed(2), 100, this.y);
     this.y = this.y + 9;
     this.doc.setFontSize(17);
     this.doc.text("Total TTC (Eur)",10,this.y);
-    this.doc.text(this.order.total.toFixed(2), 90, this.y);
+    this.doc.text(this.order.total.toFixed(2), 100, this.y);
     this.doc.setFontSize(18);
     this.y = this.y + 6;
     this.doc.text("=============================", 10, this.y);
