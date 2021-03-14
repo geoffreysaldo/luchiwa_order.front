@@ -44,6 +44,7 @@ export class OrderPrintService {
   }
 
   setOrderDetails() {
+    this.doc.setFontSize(15);
     const now = new Date();
     this.y = this.y + 10;
     this.doc.text("Date: "+ this.datepipe.transform(now, 'dd/MM/yyyy').toString() + " heure: " + now.getHours().toString() + ':' + this.addZero(now.getMinutes().toString()) + ':'+  this.addZero(now.getSeconds().toString()),10,this.y);
@@ -65,7 +66,7 @@ export class OrderPrintService {
       this.doc.text(this.order.client.city, 10, this.y);
     }
     this.y = this.y + 6;
-    this.doc.text("=========================== EUR", 10, this.y);
+    this.doc.text("=============================== EUR", 10, this.y);
   }
 
   setProductsLines() {
@@ -77,7 +78,7 @@ export class OrderPrintService {
       this.y = this.y + 8;
     })
     this.y = this.y - 1
-    this.doc.text("=============== "+this.order.products.length+" article(s) ==============", 10, this.y);
+    this.doc.text("============== "+this.order.products.length+" article(s) ===============", 10, this.y);
   }
 
   setTotals() {
@@ -105,7 +106,7 @@ export class OrderPrintService {
     this.doc.setFontSize(14);
     this.y = this.y + 8;
     this.doc.text("TVA %",10,this.y);
-    this.doc.text("CA HT Eur",38,this.y);
+    this.doc.text("CA HT Eur",45,this.y);
     this.doc.text("Mnt TVA Eur",80,this.y);
     this.y = this.y + 8
     let taxRateArray: number[] = [];
@@ -124,8 +125,8 @@ export class OrderPrintService {
     })
     taxRateArray.map((item,index) => {
       this.doc.text(item.toFixed(2),10,this.y);
-      this.doc.text((totalHT[index] - (totalHT[index] * this.order.discount)/100).toFixed(2),44,this.y);
-      this.doc.text((totalTax[index] - (totalTax[index] * this.order.discount)/100).toFixed(2),84,this.y);
+      this.doc.text((totalHT[index] - (totalHT[index] * this.order.discount)/100).toFixed(2),50,this.y);
+      this.doc.text((totalTax[index] - (totalTax[index] * this.order.discount)/100).toFixed(2),88,this.y);
       this.y = this.y + 8;
     })
   }
